@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "omnifusion"
+version = "0.0.0a0"
+description = "Placeholder package to reserve the omnifusion namespace."
+authors = ["Prodigal AI <team@prodigal.ai>"]
+license = "BSD-3-Clause"
+readme = "README.md"
+packages = [{ include = "omnifusion", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[build-system]
+requires = ["poetry-core>=1.7.0"]
+build-backend = "poetry.core.masonry.api"

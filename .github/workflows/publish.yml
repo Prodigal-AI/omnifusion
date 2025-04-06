@@ -1,0 +1,43 @@
+# ---------------- .github/workflows/publish.yml --------------
+# GitHub Actions workflow that builds the sdist/wheel and publishes
+# **via PyPI Trusted Publishing (OIDC)**.  It triggers on every tag that
+# starts with "v" (e.g. v0.0.0a0).
+
+name: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  id-token: write   # Required for OIDC
+  contents: read
+
+jobs:
+  build-and-publish:
+    name: Build and publish to PyPI
+    environment: pypi          # GitHub → Settings → Environments → pypi
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+
+      - name: Build package (sdist + wheel)
+        run: |
+          poetry build
+
+      - name: Publish to PyPI via Trusted Publisher
+        uses: pypa/gh-action-pypi-publish@v1.8.14
+        with:
+          print-hash: true  # optional: show artifact SHA256 in logs
