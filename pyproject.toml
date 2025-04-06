@@ -1,11 +1,16 @@
 [tool.poetry]
-name = "omnifusion"
-version = "0.0.0a0"
+name        = "omnifusion"
+version     = "0.0.0a1"                       # bump so tag v0.0.0a1 matches
 description = "Placeholder package to reserve the omnifusion namespace."
-authors = ["Prodigal AI <team@prodigal.ai>"]
-license = "BSD-3-Clause"
-readme = "README.md"
-packages = [{ include = "omnifusion", from = "src" }]
+authors     = [
+  "Prodigal AI <info@prodigal.ai>",          # ← valid “Name <email>” syntax
+  "Nishchal Gaba <nishgaba.ai@gmail.com>"
+]
+license     = "BSD-3-Clause"
+readme      = "README.md"
+
+# IMPORTANT: make sure the file src/omnifusion/__init__.py exists
+packages    = [{ include = "omnifusion", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
